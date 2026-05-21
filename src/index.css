@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #effbf6;
+  --color-brand-100: #d8f4e6;
+  --color-brand-200: #b3e9d0;
+  --color-brand-300: #80d6b3;
+  --color-brand-400: #4abd92;
+  --color-brand-500: #1fa17a;
+  --color-brand-600: #128062;
+  --color-brand-700: #0e6650;
+  --color-brand-800: #0c5141;
+  --color-brand-900: #0a4337;
+  --color-warm-300: #ffd6a8;
+  --color-warm-400: #ffb774;
+  --color-warm-500: #ff994a;
+  --color-warm-600: #f07c1f;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --shadow-glow: 0 30px 80px -20px rgb(31 161 122 / 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: #fafdfb;
+  color: #0c2c24;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: floatY 7s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(18, 128, 98, 0.18) 1px, transparent 0);
+  background-size: 24px 24px;
+}
