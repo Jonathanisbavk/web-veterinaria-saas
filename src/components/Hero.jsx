@@ -143,14 +143,30 @@ export default function Hero() {
                   Cuidadores cerca
                 </p>
                 {[
-                  { n: 'Carla M.', r: 4.9, d: '0.8 km' },
-                  { n: 'Diego R.', r: 5.0, d: '1.2 km' },
+                  {
+                    n: 'Carla M.',
+                    r: 4.9,
+                    d: '0.8 km',
+                    img:
+                      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=128&q=80',
+                  },
+                  {
+                    n: 'Diego R.',
+                    r: 5.0,
+                    d: '1.2 km',
+                    img:
+                      'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=128&q=80',
+                  },
                 ].map((p) => (
                   <div
                     key={p.n}
                     className="flex items-center gap-3 p-2.5 rounded-xl bg-brand-50/60"
                   >
-                    <div className="h-9 w-9 rounded-full bg-gradient-to-br from-brand-400 to-brand-600" />
+                    <img
+                      src={p.img}
+                      alt={p.n}
+                      className="h-9 w-9 rounded-full object-cover"
+                    />
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-semibold text-brand-900">{p.n}</p>
                       <p className="text-[10px] text-brand-900/60 flex items-center gap-1">

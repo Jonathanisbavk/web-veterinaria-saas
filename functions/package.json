@@ -1,0 +1,24 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions de MimoPet (Resend + Firestore)",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.0.32",
+    "@react-email/render": "^1.0.5",
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "resend": "^4.1.2"
+  }
+}

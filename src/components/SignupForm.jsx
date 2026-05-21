@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { CheckCircle2, Loader2, Mail, User, PawPrint, Briefcase } from 'lucide-react'
+import { CheckCircle2, Loader2, Mail, User, PawPrint, Briefcase, AlertCircle } from 'lucide-react'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../lib/firebase'
 
 const initialForm = { name: '', email: '', role: 'owner' }
 
@@ -30,7 +32,7 @@ export default function SignupForm() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const nextErrors = validate(formData)
     if (Object.keys(nextErrors).length > 0) {
@@ -39,11 +41,21 @@ export default function SignupForm() {
     }
 
     setStatus('loading')
-    console.log('[MimoPet] Nuevo lead capturado:', formData)
-
-    setTimeout(() => {
+    try {
+      await addDoc(collection(db, 'waitlist'), {
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        role: formData.role,
+        source: 'landing',
+        emailSent: false,
+        createdAt: serverTimestamp(),
+      })
       setStatus('success')
-    }, 900)
+    } catch (err) {
+      console.error('[MimoPet] addDoc failed', err)
+      setStatus('idle')
+      setErrors({ submit: 'No pudimos guardar tu suscripción. Inténtalo de nuevo.' })
+    }
   }
 
   const reset = () => {
@@ -187,6 +199,13 @@ export default function SignupForm() {
                     'Suscribirme ahora'
                   )}
                 </button>
+
+                {errors.submit && (
+                  <div className="flex items-start gap-2 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+                    <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                    <span>{errors.submit}</span>
+                  </div>
+                )}
 
                 <p className="text-xs text-center text-brand-900/50">
                   No compartiremos tu correo. Cero spam. Solo novedades de MimoPet.
